@@ -25,9 +25,10 @@
 			<li class="menu-item"><a href="inicio" ><div class="item-icon"><span class="fa fa-home"></span></div><div class="btn-bars-resp">Inicio</div></a></li>
 			<li class="menu-item <?php echo ($_GET['r']=='escritorio')?'item-select':'';?>"><a href="escritorio" ><div class="item-icon"><span class="fa fa-chart-pie"></span></div><div class="btn-bars-resp">Escritorio</div></a></li>
 			<li class="menu-item <?php echo ($_GET['r']=='registro')?'item-select':'';?>"><a href="registro" ><div class="item-icon"><span class="fa fa-car"></span></div><div class="btn-bars-resp">Registro</div></a></li>
-			<li class="menu-item <?php echo ($_GET['r']=='facturar')?'item-select':'';?>"><a href="facturar" ><div class="item-icon"><span class="fa fa-dollar-sign"></span></div><div class="btn-bars-resp">Facturar</div></a></li>			
+			<li class="menu-item <?php echo ($_GET['r']=='facturar')?'item-select':'';?>"><a href="facturar" ><div class="item-icon"><span class="fa fa-dollar-sign"></span></div><div class="btn-bars-resp">Facturar</div></a></li>
+			<li class="menu-item <?php echo ($_GET['r']=='nomina')?'item-select':'';?>"><a href="nomina" ><div class="item-icon"><span class="fa fa-funnel-dollar"></span></div><div class="btn-bars-resp">Nomina</div></a></li>			
 			<?php if ($_SESSION['usua_rol'] == "Super administrador" OR $_SESSION['usua_rol'] == "Administrador") {?>
-				<li class="menu-item <?php echo ($_GET['r']=='parqueaderos')?'item-select':'';?>"><a href="inventario" ><div class="item-icon"><span class="fa fa-parking"></span></div><div class="btn-bars-resp">Parqueaderos</div></a></li>
+				<li class="menu-item <?php echo ($_GET['r']=='parqueaderos')?'item-select':'';?>"><a href="parqueaderos" ><div class="item-icon"><span class="fa fa-parking"></span></div><div class="btn-bars-resp">Parqueaderos</div></a></li>
 				<li class="menu-item <?php echo ($_GET['r']=='usuarios')?'item-select':'';?>"><a href="usuarios" ><div class="item-icon"><span class="fa fa-users"></span></div><div class="btn-bars-resp">Usuarios</div></a></li>
 			<?php } ?>
 			<li class="menu-item <?php echo ($_GET['r']=='ayuda')?'item-select':'';?>"><a href="ayuda" ><div class="item-icon"><span class="fa fa-info-circle"></span></div><div class="btn-bars-resp">Ayuda</div></a></li>		

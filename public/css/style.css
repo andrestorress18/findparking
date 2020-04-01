@@ -878,7 +878,7 @@ body {
 
 .container-tabla {
   overflow: hidden !important;
-  overflow-x: auto !important; }
+  overflow-x: auto; }
 
 .factura-tabla {
   width: 80%;
@@ -1702,5 +1702,15 @@ footer {
     .cont-cara-items .cara-item .cara-item-tit {
       width: 100%;
       text-align: center; }
+
+.map-sec {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+  overflow: hidden; }
+
+.row {
+  margin-right: 0px !important;
+  margin-left: 0px !important; }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,5 +1,5 @@
 <?php
-print('<title>Categorias | Find Parking</title>');
+print('<title>Ayuda | Find Parking</title>');
 
 $cuentas_controller = new CuentasController();
 $cuentas_desc_controller = new CuentasController();

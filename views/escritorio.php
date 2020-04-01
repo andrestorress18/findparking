@@ -49,8 +49,51 @@
         chart.draw(data, options);
       }
     </script>
-<title>Resultados | Find Parking</title>
+<title>Escritorio | Find Parking</title>
 <div class="cont-pad-tre">
+	<style type="text/css" media="screen">
+  #map {
+        height: 400px;
+      }  
+  </style>
+  <div class="map-sec">
+  	<div id="map"></div>
+  	<b>Total de parqueaderos: </b> 52
+  	<b>Disponibilidad: </b> 50%
+  </div>
+    <script>
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  var center = {lat: 4.347035, lng: -74.362679};
+
+  var lugares =[
+    {lat: 4.347035, lng: -74.362679}, 
+    {lat: 4.345929, lng: -74.357715},
+    {lat: 4.342733, lng: -74.359978},
+    {lat: 4.347828, lng: -74.359346},
+    {lat: 4.339668, lng: -74.362548}
+  ];
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+    document.getElementById('map'), {
+      zoom: 16, 
+      center: center
+    }
+  );
+  for (i = 0 ; i< lugares.length; i++) {
+
+    var marker = new google.maps.Marker(
+      {position: lugares[i], 
+        map: map}
+    );
+
+  }
+  }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUn955lxF_sZt7ecu6WPg5ArJO8GwmrQs&callback=initMap"
+    async defer></script>
 	<div class="contenedor-flex cont-just-sbet">
 		<div class="cont-cuat">
 			<div id="donutchart" class="grafi-cont"></div>
@@ -60,112 +103,7 @@
 		</div>
 	</div>
 	<div class="container-tabla">
-	<table id="tbl_resultados" class="table table-hover">
-	  <thead>
-	    <tr>
-	      <th scope="col">Codigo</th>
-	      <th scope="col">Descripción</th>
-	      <th scope="col">Valor</th>
-	      <th scope="col">Tipo</th>
-	      <th scope="col">Cuenta</th>
-	      <th scope="col">Usuario</th>
-	      <th scope="col">Periodo</th>
-	      <th scope="col">Estado</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    <tr>
-	      <th scope="row">1</th>
-	      <td>Venta de productos A</td>
-	      <td>1.220.000</td>
-	      <td>4 - Ingresos</td>
-	      <td>41 - Operacionales</td>
-	      <td>Andres Torres</td>
-	      <td>20/11/2019 - 20/11/2019</td>
-	      <td>Pendiente</td>
-	    </tr>
-	    <tr>
-	      <th scope="row">2</th>
-	      <td>Venta de productos A</td>
-	      <td>1.220.000</td>
-	      <td>4 - Ingresos</td>
-	      <td>41 - Operacionales</td>
-	      <td>Andres Torres</td>
-	      <td>20/11/2019 - 20/11/2019</td>
-	      <td>Pendiente</td>
-	    </tr>
-	    <tr>
-	      <th scope="row">3</th>
-	      <td>Venta de productos A</td>
-	      <td>1.220.000</td>
-	      <td>4 - Ingresos</td>
-	      <td>41 - Operacionales</td>
-	      <td>Andres Torres</td>
-	      <td>20/11/2019 - 20/11/2019</td>
-	      <td>Pendiente</td>
-	    </tr>
-	    <tr>
-	      <th scope="row">4</th>
-	      <td>Venta de productos A</td>
-	      <td>1.220.000</td>
-	      <td>4 - Ingresos</td>
-	      <td>41 - Operacionales</td>
-	      <td>Andres Torres</td>
-	      <td>20/11/2019 - 20/11/2019</td>
-	      <td>Pendiente</td>
-	    </tr>
-	    <tr>
-	      <th scope="row">5</th>
-	      <td>Venta de productos A</td>
-	      <td>1.220.000</td>
-	      <td>4 - Ingresos</td>
-	      <td>41 - Operacionales</td>
-	      <td>Andres Torres</td>
-	      <td>20/11/2019 - 20/11/2019</td>
-	      <td>Pendiente</td>
-	    </tr>
-	    <tr>
-	      <th scope="row">6</th>
-	      <td>Venta de productos A</td>
-	      <td>1.220.000</td>
-	      <td>4 - Ingresos</td>
-	      <td>41 - Operacionales</td>
-	      <td>Andres Torres</td>
-	      <td>20/11/2019 - 20/11/2019</td>
-	      <td>Pendiente</td>
-	    </tr>
-	    <tr>
-	      <th scope="row">7</th>
-	      <td>Venta de productos A</td>
-	      <td>1.220.000</td>
-	      <td>4 - Ingresos</td>
-	      <td>41 - Operacionales</td>
-	      <td>Andres Torres</td>
-	      <td>20/11/2019 - 20/11/2019</td>
-	      <td>Pendiente</td>
-	    </tr>
-	    <tr>
-	      <th scope="row">8</th>
-	      <td>Venta de productos A</td>
-	      <td>1.220.000</td>
-	      <td>4 - Ingresos</td>
-	      <td>41 - Operacionales</td>
-	      <td>Andres Torres</td>
-	      <td>20/11/2019 - 20/11/2019</td>
-	      <td>Pendiente</td>
-	    </tr>
-	    <tr>
-	      <th scope="row">9</th>
-	      <td>Venta de productos A</td>
-	      <td>1.220.000</td>
-	      <td>4 - Ingresos</td>
-	      <td>41 - Operacionales</td>
-	      <td>Andres Torres</td>
-	      <td>20/11/2019 - 20/11/2019</td>
-	      <td>Pendiente</td>
-	    </tr>
-	  </tbody>
-	</table>
+	
 </div>
 </div>
 <script>

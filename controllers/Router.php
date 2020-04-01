@@ -33,9 +33,6 @@ class Router{
                     break;
                 case 'ayuda':
                     if (!isset($_POST['crud'])) $controller->load_view_user('ayuda');
-                    else if ($_POST['crud'] == 'add') $controller->load_page('actions-planta');
-                    else if ($_POST['crud'] == 'del') $controller->load_page('actions-planta');
-                    else if ($_POST['crud'] == 'edi') $controller->load_page('actions-planta');
                     break;
                 case 'usuarios':
                     if (!isset($_POST['crud'])) $controller->load_view_user('usuarios');
@@ -44,15 +41,15 @@ class Router{
                     else if ($_POST['crud'] == 'edi') $controller->load_page('actions-usuario');
                     else if ($_POST['crud'] == 'edit-pass') $controller->load_page('actions-usuario');
                     break;
+                case 'parqueaderos':
+                    if (!isset($_POST['crud'])) $controller->load_view_user('parqueaderos');
+                    break;
                 case 'escritorio':
                     if (!isset($_POST['crud'])) $controller->load_view_user('escritorio');
-                    else if ($_POST['crud'] == 'add') $controller->load_page('actions-categoria');
-                    else if ($_POST['crud'] == 'del') $controller->load_page('actions-categoria');
-                    else if ($_POST['crud'] == 'edi') $controller->load_page('actions-categoria');
-                    else if ($_POST['crud'] == 'val') $controller->load_page('actions-categoria');
-                    else if ($_POST['crud'] == 'view') $controller->load_view('view-categoria');
-                    else if ($_POST['crud'] == 'edit-pass') $controller->load_page('actions-usuario');
                     break;
+                 case 'registro':
+                    if (!isset($_POST['crud'])) $controller->load_view_user('registro');
+                    break;    
                 case 'cerrar':
                     $user_session = new SessionController();
                     $user_session->logout();
@@ -87,7 +84,7 @@ class Router{
                                 $_SESSION['usua_nom'] = $session[0]['usua_nom'];
                                 $_SESSION['usua_dir'] = $session[0]['usua_dir'];
                                 $_SESSION['usua_rol'] = $session[0]['usua_rol'];
-                                header('Location: ./resultados');
+                                header('Location: ./escritorio');
                             }
                         }
                         break;
