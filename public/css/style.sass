@@ -203,9 +203,12 @@ body
 				background: rgba($color-dos,.9)
 				border-radius: 8px
 				box-sizing: border-box
+				@media (max-width: $tablet)
+					width: 100%
 				@media (max-width: $mobil)
 					background: transparent
 					box-shadow: none
+					width: 100%
 				.login-img
 					width: 100%
 					height: auto
@@ -223,6 +226,9 @@ body
 			width: 60%
 			padding: 15px 25px 15px 0px
 			box-sizing: border-box
+			@media (max-width: $tablet)
+				padding: 0px
+				display: none
 			#map
 				width: 80%
 				border-radius: 0px 15px 15px 0px
@@ -1546,12 +1552,35 @@ footer
 		.cara-item-tit
 			width: 100%
 			text-align: center
+.esc-secc
+	display: flex
+	justify-content: space-between
+.esc-item
+	width: 32%
+	margin: 15px 0px
+	border-radius: 15px
+	background-color: #fff
+	box-shadow: 0px 0px 3px rgba(0,0,0,.3)
+	overflow: hidden
+	.esc-tit
+		background-color: rgba($color-uno,.8)
+		color: #fff
+		padding: 15px
+		font-size: 18px
+		display: flex
+		justify-content: space-between
+		i
+			font-size: 30px
+	.esc-text
+		padding: 15px
+		text-align: center
 //________________________Find parking__________________________//
 .map-sec
 	background-color: #fff
 	border-radius: 10px
 	box-shadow: 0px 0px 3px rgba(0,0,0,.5)
 	overflow: hidden
+
 .row
 	margin-right: 0px !important
 	margin-left: 0px !important

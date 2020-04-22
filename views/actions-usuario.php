@@ -1,5 +1,5 @@
 <?php
-$user_controller = new UsersController();
+$user_controller = new UsuarioController();
 if ($_POST['crud'] == 'edit-pass') {
     $act_pass = array(
         'user_id' => $_POST['user_id'],

@@ -16,7 +16,7 @@ if ($_SESSION['Sesion'] == true) {
 	<meta property="og:description" content="" />
 	<meta name="descripcion" content="" />
 	<meta property="og:image" content="https://develtec.net/" />
-	<meta name="theme-color" content="#FF6600">
+	<meta name="theme-color" content="#ED3237">
 	<meta name="keywords" content="jquery, css3, java, sliding, box, menu, cube, navigation, portfolio, thumbnails" />
 	<link rel="icon" type="image/png" href="public/img/system/findParking-ico.png" />
 	<meta name="viewport" content="width=device-width, user=scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />

@@ -5,7 +5,7 @@ class UsuarioModel extends Model{
         foreach ($usuario_data as $key => $value) {
             $$key = $value;
         }
-        $this->query = "UPDATE tbl_usuario SET usua_ced = '$usua_ced', usua_nom = '$usua_nom', usua_ema = '$usua_ema', usua_rol = '$usua_rol', usua_est = '$usua_est', usua_enti_fk = $usua_enti_fk";
+        $this->query = "UPDATE tbl_usuario SET usua_ced = '$usua_ced', usua_nom = '$usua_nom', usua_ema = '$usua_ema', usua_rol = '$usua_rol', usua_est = '$usua_est'";
         $this->query .= isset($usua_pas) ? ", usua_pas = MD5('$usua_pas')" : "";
         $this->query .= isset($usua_img) ? ", usua_img = '$usua_img'" : "";
         $this->query .= " WHERE usua_cod = $usua_cod;";
@@ -16,7 +16,7 @@ class UsuarioModel extends Model{
         foreach ($usuario_data as $key => $value) {
             $$key = $value;
         }
-        $this->query = "INSERT INTO tbl_usuario (usua_ced,usua_nom,usua_ema,usua_pas,usua_img,usua_rol,usua_est,usua_enti_fk) VALUES ('$usua_ced','$usua_nom','$usua_ema',MD5('$usua_pas'),'$usua_img','$usua_rol','$usua_est',$usua_enti_fk)";
+        $this->query = "INSERT INTO tbl_usuario (usua_ced,usua_nom,usua_ema,usua_pas,usua_img,usua_rol,usua_est) VALUES ('$usua_ced','$usua_nom','$usua_ema',MD5('$usua_pas'),'$usua_img','$usua_rol','$usua_est')";
          return $this->set_query();
     }
 

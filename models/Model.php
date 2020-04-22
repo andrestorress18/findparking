@@ -4,7 +4,7 @@ abstract class Model
     private static $db_host = 'localhost';
     private static $db_user = 'root';
     private static $db_pass = '';
-    protected $db_name = 'iCash_db';
+    protected $db_name = 'findparking_db';
     private static $db_charset = "utf8";
     private $conn;
     protected $query;

@@ -1,68 +1,77 @@
-DROP DATABASE IF EXISTS icash_db;
+DROP DATABASE IF EXISTS findparking_db;
 
-CREATE DATABASE IF NOT EXISTS icash_db;
+CREATE DATABASE IF NOT EXISTS findparking_db;
 
-USE icash_db;
-
-CREATE TABLE tbl_entidad (
-  enti_cod int(5) AUTO_INCREMENT PRIMARY KEY,
-  enti_nom text NOT NULL,
-  enti_nit varchar(100),
-  enti_ema varchar(80),
-  enti_tit varchar(50) NOT NULL,
-  enti_des varchar(100) NOT NULL,
-  enti_img text NOT NULL,
-  enti_tip varchar(25) NOT NULL,
-  enti_ciu varchar(25) NOT NULL,
-  enti_pai varchar(25) NOT NULL
-);
+USE findparking_db;
 
 CREATE TABLE tbl_usuario (
-  usua_cod int(5) AUTO_INCREMENT PRIMARY KEY,
-  usua_ced varchar(12) NOT NULL UNIQUE,
-  usua_nom varchar(255) NOT NULL,
-  usua_cel varchar(11) NOT NULL,
-  usua_ema varchar(80) NOT NULL UNIQUE,
-  usua_pas text NOT NULL,
-  usua_img text NOT NULL,
-  usua_dir varchar(50) NOT NULL,
-  usua_rol varchar(50) NOT NULL,
-  usua_est varchar(25) NOT NULL,
-  usua_enti_fk int(5) NOT NULL,
-  FOREIGN KEY (usua_enti_fk) REFERENCES tbl_entidad(enti_cod) 
+  usua_cod int(5) AUTO_INCREMENT PRIMARY KEY, -- Codigo del usuario
+  usua_ced varchar(12) NOT NULL UNIQUE,   -- Cedula del usuario
+  usua_nom varchar(255) NOT NULL, -- Nombre del usuario
+  usua_cel varchar(11) NOT NULL,  -- Celular del usuario
+  usua_ema varchar(80) NOT NULL UNIQUE, -- Correo del usuario
+  usua_pas varchar(40) NOT NULL, -- Contraseña del usuario
+  usua_img varchar(40) NOT NULL, -- Imagen del usuario
+  usua_dir varchar(50) NOT NULL,  -- Dirección del usuario
+  usua_rol varchar(50) NOT NULL,  -- Rol del usuario
+  usua_est varchar(25) NOT NULL -- Estado del usuario (Activo - Inactivo)
+);
+
+
+CREATE TABLE tbl_parqueadero(
+  parq_id int(5) AUTO_INCREMENT PRIMARY KEY, -- Identificador de la parqueadero
+  parq_nom varchar(50) NOT NULL, -- Nombre de la parqueadero
+  parq_des varchar(100),         -- Descripción de la parqueadero
+  parq_tar varchar(10) NOT NULL, -- Tarifa de la parqueadero
+  parq_log varchar(50) NOT NULL, -- Longitud del parqueadero
+  parq_lat varchar(50) NOT NULL, -- Latitud del parqueadero
+  parq_cap varchar(50) NOT NULL, -- Capacidad del parqueadero
+  parq_fot varchar(50) NOT NULL -- Foto del parqueadero
+);
+
+CREATE TABLE tbl_gestor(
+  gest_id int(5) AUTO_INCREMENT PRIMARY KEY, -- Codigo del gestor del parqueadero
+  gest_parq_fk int(5) NOT NULL, -- Codigo del parqueadero
+  gest_usua_fk int(5) NOT NULL, -- Codigo del usuario que gestiona
+  FOREIGN KEY (gest_parq_fk) REFERENCES tbl_parqueadero(parq_id) 
+    ON DELETE RESTRICT ON UPDATE NO ACTION,
+  FOREIGN KEY (gest_usua_fk) REFERENCES tbl_usuario(usua_cod) 
     ON DELETE RESTRICT ON UPDATE NO ACTION
 );
 
-
-CREATE TABLE tbl_categoria_puc(
-	catp_id int(2) AUTO_INCREMENT PRIMARY KEY, -- Identificador de la categoria
-	catp_nombre varchar(20) NOT NULL -- Nombre de la categoria
+CREATE TABLE tbl_cupo(
+  cupo_cod int(10) AUTO_INCREMENT PRIMARY KEY, -- Identificador del cupo
+  cupo_est boolean NOT NULL, -- Estado del cupo
+  cupo_cub boolean NOT NULL, -- Cupo cubierto
+  cupo_dim varchar(10) NOT NULL -- Dimesiones del cupo
 );
-CREATE TABLE tbl_cuentas_puc(
-	cpuc_id varchar(10) PRIMARY KEY, -- Identificador de la cuenta puc
-	cpuc_des text NOT NULL, -- Descripción de la cuenta puc}
-	cpuc_cate_fk int(2) NOT NULL,
-	FOREIGN KEY (cpuc_cate_fk) REFERENCES tbl_categoria_puc(catp_id) 
-		ON DELETE CASCADE ON UPDATE NO ACTION
-);
-
-CREATE TABLE tbl_estado(
-	esta_id int(2) AUTO_INCREMENT PRIMARY KEY, -- Identificador de estado
-	esta_nom varchar(15) NOT NULL -- Nombre del estado (Activo Inactivo)
+CREATE TABLE tbl_cupo_parqueadero(
+  cupa_parq_fk int(5) NOT NULL, -- Parqueadero al que pertenece el cupo
+  cupa_cupo_fk int(10) NOT NULL, -- Cupo del parqueadero
+  FOREIGN KEY (cupa_parq_fk) REFERENCES tbl_parqueadero(parq_id) 
+    ON DELETE CASCADE ON UPDATE NO ACTION,
+  FOREIGN KEY (cupa_cupo_fk) REFERENCES tbl_cupo(cupo_cod) 
+    ON DELETE CASCADE ON UPDATE NO ACTION
 );
 
-CREATE TABLE tbl_cuentas(
-	cuen_id int(5) AUTO_INCREMENT PRIMARY KEY, -- Identificador del sistema para el cuenta
-  	cuen_valo varchar(12) NOT NULL UNIQUE, -- Numero de Identificación Tributario del cuenta
-  	cuen_des text NOT NULL, -- Nombre del cuenta
-  	cuen_fec date NOT NULL,
-	cuen_esta_fk int(2) NOT NULL, -- Llave foranea para el estado del cuenta
-	cuen_usua_fk int(5) NOT NULL, -- Llave foranea del usuario creador del cuenta
-	cuen_cpuc_fk varchar(10) NOT NULL, -- Llave foranea del usuario creador del cuenta
-	FOREIGN KEY (cuen_cpuc_fk) REFERENCES tbl_cuentas_puc(cpuc_id) 
-		ON DELETE CASCADE ON UPDATE NO ACTION,
-	FOREIGN KEY (cuen_esta_fk) REFERENCES tbl_estado(esta_id) 
-		ON DELETE CASCADE ON UPDATE NO ACTION,
-	FOREIGN KEY (cuen_usua_fk) REFERENCES tbl_usuario(usua_cod) 
-		ON DELETE CASCADE ON UPDATE NO ACTION
+CREATE TABLE tbl_vehiculo(
+  vehi_cod int(2) AUTO_INCREMENT PRIMARY KEY, -- Identificador del vehiculo
+  vehi_pla varchar(8) NOT NULL, -- Placa del vehiculo
+  vehi_col varchar(10) NOT NULL, -- Color del vehiculo
+  vehi_con varchar(50) NOT NULL -- Conductor del vehiculo
+);
+
+CREATE TABLE tbl_comprobante(
+  comp_cod int(6) UNSIGNED ZEROFILL AUTO_INCREMENT PRIMARY KEY, -- Identificador del sistema para el cuenta
+  comp_fin date NOT NULL, -- Numero de Identificación Tributario del cuenta
+  comp_hin time NOT NULL, -- Hora de ingreso
+  comp_fsa date NOT NULL,
+  comp_hsa time NOT NULL,
+  comp_val varchar(10) NOT NULL,
+  comp_cupo_fk int(2) NOT NULL, -- Llave foranea del cupo en uso
+  comp_vehi_fk int(5) NOT NULL, -- Llave foranea del vehiculo que usa el cupo
+  FOREIGN KEY (comp_cupo_fk) REFERENCES tbl_cupo(cupo_cod) 
+    ON DELETE CASCADE ON UPDATE NO ACTION,
+  FOREIGN KEY (comp_vehi_fk) REFERENCES tbl_vehiculo(vehi_cod) 
+    ON DELETE CASCADE ON UPDATE NO ACTION
 );

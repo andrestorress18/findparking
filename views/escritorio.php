@@ -3,52 +3,6 @@
 	//$vivero = $vivero_controller->get($_GET['cod']);
 ?>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Cuentas', 'Hours per Day'],
-          ['Activo',    120000],
-          ['Pasivo',      457100],
-          ['Ingresos',  1748200],
-          ['Gastos', 548100],
-          ['Costos',   259000]
-        ]);
-
-        var options = {
-          title: 'Estado de resultados',
-          pieHole: 0.4,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-        chart.draw(data, options);
-      }
-    </script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
-        ]);
-
-        var options = {
-          title: 'Company Performance',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-        chart.draw(data, options);
-      }
-    </script>
 <title>Escritorio | Find Parking</title>
 <div class="cont-pad-tre">
 	<style type="text/css" media="screen">
@@ -56,10 +10,37 @@
         height: 400px;
       }  
   </style>
+  <div class="esc-secc">
+    <div class="esc-item">
+      <div class="esc-tit">
+        Cupos disponibles
+        <i class="fa fa-eye"></i>
+      </div>
+      <div class="esc-text">
+        <h1>10</h1>
+      </div>
+    </div>
+    <div class="esc-item">
+      <div class="esc-tit">
+        Vehiculos ingresados
+        <i class="fa fa-car"></i>
+      </div>
+      <div class="esc-text">
+        <h1>85</h1>
+      </div>
+    </div>
+    <div class="esc-item">
+      <div class="esc-tit">
+        Ingresos del día
+        <i class="fa fa-dollar-sign"></i>
+      </div>
+      <div class="esc-text">
+        <h1>$ 157.000</h1>
+      </div>
+    </div>
+  </div>
   <div class="map-sec">
   	<div id="map"></div>
-  	<b>Total de parqueaderos: </b> 52
-  	<b>Disponibilidad: </b> 50%
   </div>
     <script>
 // Initialize and add the map
@@ -94,17 +75,8 @@ function initMap() {
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUn955lxF_sZt7ecu6WPg5ArJO8GwmrQs&callback=initMap"
     async defer></script>
-	<div class="contenedor-flex cont-just-sbet">
-		<div class="cont-cuat">
-			<div id="donutchart" class="grafi-cont"></div>
-		</div>
-		<div class="cont-seis">
-			<div id="curve_chart" class="grafi-cont" style="width: 100%; height: 400px"></div>
-		</div>
-	</div>
-	<div class="container-tabla">
 	
-</div>
+
 </div>
 <script>
 	$(document).ready(function () {
