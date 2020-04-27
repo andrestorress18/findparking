@@ -25,7 +25,6 @@ CREATE TABLE tbl_parqueadero(
   parq_tar varchar(10) NOT NULL, -- Tarifa de la parqueadero
   parq_log varchar(50) NOT NULL, -- Longitud del parqueadero
   parq_lat varchar(50) NOT NULL, -- Latitud del parqueadero
-  parq_cap varchar(50) NOT NULL, -- Capacidad del parqueadero
   parq_fot varchar(50) NOT NULL -- Foto del parqueadero
 );
 
@@ -34,18 +33,19 @@ CREATE TABLE tbl_gestor(
   gest_parq_fk int(5) NOT NULL, -- Codigo del parqueadero
   gest_usua_fk int(5) NOT NULL, -- Codigo del usuario que gestiona
   FOREIGN KEY (gest_parq_fk) REFERENCES tbl_parqueadero(parq_id) 
-    ON DELETE RESTRICT ON UPDATE NO ACTION,
+    ON DELETE CASCADE ON UPDATE NO ACTION,
   FOREIGN KEY (gest_usua_fk) REFERENCES tbl_usuario(usua_cod) 
-    ON DELETE RESTRICT ON UPDATE NO ACTION
+    ON DELETE CASCADE ON UPDATE NO ACTION
 );
 
 CREATE TABLE tbl_cupo(
   cupo_cod int(10) AUTO_INCREMENT PRIMARY KEY, -- Identificador del cupo
-  cupo_est boolean NOT NULL, -- Estado del cupo
-  cupo_cub boolean NOT NULL, -- Cupo cubierto
-  cupo_dim varchar(10) NOT NULL -- Dimesiones del cupo
+  cupo_ref varchar(15) NOT NULL -- Referencia del cupo
 );
 CREATE TABLE tbl_cupo_parqueadero(
+  cupa_est int(5) NOT NULL, -- Estado del cupo
+  cupa_cub boolean NOT NULL, -- Cupo cubierto
+  cupa_dim varchar(10) NOT NULL, -- Dimesiones del cupo
   cupa_parq_fk int(5) NOT NULL, -- Parqueadero al que pertenece el cupo
   cupa_cupo_fk int(10) NOT NULL, -- Cupo del parqueadero
   FOREIGN KEY (cupa_parq_fk) REFERENCES tbl_parqueadero(parq_id) 
@@ -68,10 +68,10 @@ CREATE TABLE tbl_comprobante(
   comp_fsa date NOT NULL,
   comp_hsa time NOT NULL,
   comp_val varchar(10) NOT NULL,
-  comp_cupo_fk int(2) NOT NULL, -- Llave foranea del cupo en uso
+  comp_cupo_fk int(10) NOT NULL, -- Llave foranea del cupo en uso
   comp_vehi_fk int(5) NOT NULL, -- Llave foranea del vehiculo que usa el cupo
   FOREIGN KEY (comp_cupo_fk) REFERENCES tbl_cupo(cupo_cod) 
-    ON DELETE CASCADE ON UPDATE NO ACTION,
+    ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (comp_vehi_fk) REFERENCES tbl_vehiculo(vehi_cod) 
-    ON DELETE CASCADE ON UPDATE NO ACTION
+    ON DELETE NO ACTION ON UPDATE NO ACTION
 );

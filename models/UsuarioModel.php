@@ -1,7 +1,15 @@
 <?php
 class UsuarioModel extends Model{
 
-    public function set($usuario_data = array()) {
+    public function ins($usuario_data = array()) {
+        foreach ($usuario_data as $key => $value) {
+            $$key = $value;
+        }
+        $this->query = "INSERT INTO tbl_usuario (usua_ced,usua_nom,usua_ema,usua_pas,usua_img,usua_rol,usua_est) VALUES ('$usua_ced','$usua_nom','$usua_ema',MD5('$usua_pas'),'$usua_img','$usua_rol','$usua_est')";
+         return $this->set_query();
+    }
+
+    public function upd($usuario_data = array()) {
         foreach ($usuario_data as $key => $value) {
             $$key = $value;
         }
@@ -12,15 +20,7 @@ class UsuarioModel extends Model{
         return $this->set_query();
     }
 
-    public function add($usuario_data = array()) {
-        foreach ($usuario_data as $key => $value) {
-            $$key = $value;
-        }
-        $this->query = "INSERT INTO tbl_usuario (usua_ced,usua_nom,usua_ema,usua_pas,usua_img,usua_rol,usua_est) VALUES ('$usua_ced','$usua_nom','$usua_ema',MD5('$usua_pas'),'$usua_img','$usua_rol','$usua_est')";
-         return $this->set_query();
-    }
-
-    public function get($usua_cod = '') {
+    public function sel($usua_cod = '') {
         $this->query = ($usua_cod != '') ? "SELECT * FROM tbl_usuario WHERE usua_cod = $usua_cod"
         :"SELECT * FROM tbl_usuario";
         $this->get_query();

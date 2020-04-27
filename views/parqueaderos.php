@@ -1,55 +1,80 @@
-<?php print('<title>Cuentas | Find Parking</title>');?>
+<?php
+if ($_SESSION['usua_rol']<>"Administrador") {
+	$controller  = new ViewController();
+	$controller->load_view('error403');
+}else{ ?>
+<title>Parqueaderos | Find Parking</title>
 <div class="container-cab">
 	<h3>Parquedaros</h3>
 	<div class="contenedor-flex">
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCuenta">
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal-add">
 		  Agregar parqueadero
 		</button>
 	</div>
 </div>
 <div class="cont-pad-tre">
 	<?php 
-	$result_controller = new RegistroController();
-	$result = $result_controller->get(); 
+	if (isset($_GET['success'])) {
+			echo '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>'.$_GET['success'].'</strong> 
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>';
+		}
+		if (isset($_GET['error'])) {
+			echo '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>'.$_GET['error'].'</strong> 
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>';
+		}
+	$result_controller = new ParqueaderoController();
+	$result = $result_controller->sel(); 
+	if ($_GET['r'] == 'parqueaderos' && !isset($_POST['crud'])) {
+		
+		$datos = array_keys($result[0]);
+	    $modal = new FunctionModel();
+	    $modal->ventana_modal("add",$datos, "", "Añadir Parqueadero", "form-parking-add");
+	    $modal->ventana_modal("edi",$datos, "", "Editar Parqueadero", "form-parking-edi");
+	    $modal->ventana_modal("del",$datos, "", "Eliminar Parqueadero", "form-parking-del");
+	}
+	
 	$num_result = empty($result) ? 0 : count($result); 
-
-	$datos = 1;
-	$modal = new FunctionModel();
-	$modal->ventana_modal("fact", $datos, "", "Generar factura", "form-facturar");
 	 ?>
 	<div class="container-tabla">
 		<table id="tbl_cuentas" class="table table-striped">
 		  	<thead>
 		    	<tr>
 					<th scope="col">#</th>
-					<th scope="col">Conductor</th>
-					<th scope="col">Placa:</th>
-					<th scope="col">Fecha</th>
-					<th scope="col">Hora</th>
-					<th scope="col">Estado</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Descripción</th>
+					<th scope="col">Tarifa hora</th>
+					<th scope="col">Longitud</th>
+					<th scope="col">Latitud</th>
 					<th scope="col">Opciones</th>
 			    </tr>
 		  </thead>
 		  <tbody>
-		  	<?php 
-				for ($m = 0; $m < $num_result; $m++) {?>
+		  	<?php for ($m = 0; $m < $num_result; $m++) {?>
 			    <tr>
-			      <th scope="row"><?php echo $result[$m]['cuen_id']; ?></th>
-						<td><?php echo $result[$m]['cuen_des']; ?></td>
-						<td><?php echo $result[$m]['cuen_valo']; ?></td>
-						<td><?php echo $result[$m]['usua_nom']; ?></td>
-						<td><?php echo $result[$m]['cuen_fec']; ?></td>
-						<td><?php echo $result[$m]['esta_nom']; ?></td>
-			      		<td>
-			      	    <?php if ($_SESSION['usua_rol'] == "Super administrador" OR $_SESSION['usua_rol'] == "Administrador") {
-			      		echo '<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#Modal-fact" data-fact_id="' . $result[$m]['cuen_id'] . '" data-name="' . $result[$m]['cuen_des'] . '" data-cuen_des="' . $result[$m]['cuen_des'] . '" data-fact_pla="'.$result[$m]['cuen_valo'].'" ><i class="fa fa-dollar-sign"></i>Facturar</button>';	
-			      	 	}?>	
-				      	<?php if ($_SESSION['usua_rol'] == "Operario") {?>
-					      	<button type="button" class="btn btn-info"><i class="fa fa-edit"></i></button>
-					      	<button type="button" class="btn btn-danger"><i class="fa fa-trash-alt"></i></button>
-				      	<?php }?>
-				    	</td>
-		   		 </tr>
+			    	<th scope="row"><?php echo $result[$m]['parq_id']; ?></th>
+					<td><?php echo $result[$m]['parq_nom']; ?></td>
+					<td><?php echo $result[$m]['parq_des']; ?></td>
+					<td><?php echo $result[$m]['parq_tar']; ?></td>
+					<td><?php echo $result[$m]['parq_log']; ?></td>
+					<td><?php echo $result[$m]['parq_lat']; ?></td>
+		      		<td>
+		      	    <?php 
+		      		echo '<button type="button" class="btn btn-warning btn-sm" title="Modificar" data-toggle="modal" data-target="#Modal-parq" data-parq_id="' . $result[$m]['parq_id'] . '" data-name="' . $result[$m]['parq_nom'] . '" data-parq_des="' . $result[$m]['parq_des'] . '" data-parq_tar="'.$result[$m]['parq_tar'].'" ><i class="fa fa-pencil-alt"></i></button>';
+		      		echo '<button type="button" class="btn btn-danger btn-sm" title="Eliminar" data-toggle="modal" data-target="#Modal-del" data-name="'.$result[$m]['parq_nom'].'" 
+					data-parq_id="'.$result[$m]['parq_id'].'" ';
+					for ($i=0; $i < $num_result; $i++) { 
+						echo 'data-'.$datos[$i].'="'.$result[$m][$datos[$i]].'" ';
+					}
+					echo '><i class="fa fa-trash"></i></button>';	
+					 ?>
+			    	</td>
+		   		</tr>
 			<?php } ?>
 		    
 		  	</tbody>
@@ -62,3 +87,4 @@
 	  $('.dataTables_length').addClass('bs-select');
 	});
 </script>
+<<?php } ?>

@@ -35,6 +35,28 @@
       </div>
     </div>
     <div class="form-row align-items-center">
+      <div class="col-sm-6 my-1">
+      	<div class="form-group">
+	    	<label for="usua_est">Estado</label>
+		    <select name="usua_est" class="form-control" id="edi_usua_est" required>
+				<option value="">Seleccione</option>
+				<option name="Activo" value="Activo" >Activo</option>
+				<option name="Inactivo" value="Inactivo" >Inactivo</option>
+			</select>
+	    </div>
+      </div>
+      <div class="col-sm-6 my-1">
+      	<div class="form-group">
+	    	<label for="usua_rol">Rol</label>
+		    <select name="usua_rol" class="form-control" id="edi_usua_rol" required>
+				<option value="">Seleccione</option>
+				<option name="Operario" value="Operario" >Operario</option>
+				<option name="Administrador" value="Administrador" >Administrador</option>
+			</select>
+	    </div>
+      </div>
+  </div>
+    <div class="form-row align-items-center">
         <div class="col-sm-12 my-1">
             <div class="form-group">
 		        <label>Cargar imagen</label>

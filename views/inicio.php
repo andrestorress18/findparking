@@ -10,7 +10,7 @@
 				<li><a href="mapa-parking" title="">Mapa de parqueaderos</a></li>
 				<li>
 				<?php if ($_SESSION['Sesion'] == true) {
-					echo "<a class='btn-sesion' href='usuarios' title=''>Administrar</a>";
+					echo "<a class='btn-sesion' href='escritorio' title=''>Administrar</a>";
 				}else{
 					echo "<a class='btn-sesion' href='login' title=''>Iniciar Sesión</a>";
 				} ?>
@@ -67,10 +67,10 @@
 					</li>
 					<li class="cara-item">
 						<div class="cara-item-ico">
-							<i class="fas fa-chart-line"></i>
+							<i class="fas fa-map-marked-alt"></i>
 						</div>
 						<div class="cara-item-tit">
-							<h3>Estadisticas</h3>
+							<h3>Ubicación</h3>
 						</div>
 					</li>
 					<li class="cara-item">
@@ -90,7 +90,6 @@
 		<div class="vs-left">
 			<h2>Find Parking</h2>
 			<p>El propósito del software contable Find Parking a desarrollar, es brindar una eficiente solución a las diferentes empresas que generar una contabilidad básica de su producción, de una manera viable y fácil a adquirir a dichos usuarios, satisfaciendo la necesidad de almacenar información de vital importancia para sus finanzas, y que se compone básicamente por diferentes funciones que permiten mostrar cálculos de las cuentas registradas.</p>
-			<a href="quienes-somos" class="btn-sim">Ver más</a>
 		</div>
 		<div class="vs-right">
 			<img src="public/img/system/find parking-h.png" alt="">

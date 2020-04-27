@@ -25,12 +25,6 @@ class Router{
                 case 'mapa-parking':
                     $controller->load_view('mapa-parking');
                     break;
-                case 'facturar':
-                    if (!isset($_POST['crud'])) $controller->load_view_user('facturar');
-                    else if ($_POST['crud'] == 'add') $controller->load_page('actions-planta');
-                    else if ($_POST['crud'] == 'del') $controller->load_page('actions-planta');
-                    else if ($_POST['crud'] == 'edi') $controller->load_page('actions-planta');
-                    break;
                 case 'ayuda':
                     if (!isset($_POST['crud'])) $controller->load_view_user('ayuda');
                     break;
@@ -43,6 +37,9 @@ class Router{
                     break;
                 case 'parqueaderos':
                     if (!isset($_POST['crud'])) $controller->load_view_user('parqueaderos');
+                    else if ($_POST['crud'] == 'add') $controller->load_page('actions-parqueadero');
+                    else if ($_POST['crud'] == 'del') $controller->load_page('actions-parqueadero');
+                    else if ($_POST['crud'] == 'edi') $controller->load_page('actions-parqueadero');
                     break;
                 case 'escritorio':
                     if (!isset($_POST['crud'])) $controller->load_view_user('escritorio');
@@ -55,7 +52,7 @@ class Router{
                     $user_session->logout();
                     break;
                 default:
-                    $controller->load_view('inicio');
+                    $controller->load_view('error404');
                     break;
             }
         } else {

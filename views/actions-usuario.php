@@ -25,7 +25,7 @@ if ($_POST['crud'] == 'edit-pass') {
         'usua_est' => $_POST['usua_est'],
         'usua_enti_fk' => 1
     );
-    $id_user = $user_controller->add($new_user);
+    $id_user = $user_controller->ins($new_user);
     if ($id_user == -1) {
         header('Location: ./usuarios&error=El usuario no se registro debido a que ya existe.');
     }else{
@@ -54,7 +54,7 @@ if ($_POST['crud'] == 'edit-pass') {
         'usua_est' => $_POST['usua_est'],
         'usua_enti_fk' => 1
     );
-    $id_user = $user_controller->set($act_user);
+    $id_user = $user_controller->upd($act_user);
     if ($id_user == -1){
         header('Location: ./usuarios&error=El usuario no fue actualizado, usuario duplicado');
     }else if (isset($usua_img)) {

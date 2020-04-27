@@ -1,8 +1,12 @@
 <?php
+if ($_SESSION['usua_rol']<>"Administrador") {
+	$controller  = new ViewController();
+	$controller->load_view('error403');
+}else{
 print('<title>Usuarios | Find Parking</title>');
 /***********INICIO CUERPO***********/
 $usuario_controller = new UsuarioController();
-$usuario = $usuario_controller->get();
+$usuario = $usuario_controller->sel();
 $num_usuario = empty($usuario) ? 0 : count($usuario);
 $datos = array_keys($usuario[0]);
 $num_tit = empty($datos) ? 0 : count($datos);
@@ -103,3 +107,4 @@ if (empty($usuario)) {
 }
 /***********FIN CUERPO***********/
 print('	</div>');
+}

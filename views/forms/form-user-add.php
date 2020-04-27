@@ -34,7 +34,7 @@
 			</select>
 	    </div>
       </div>
-  </div>
+  	</div>
     <div class="form-row align-items-center">
       <div class="col-sm-8 my-1">
       	<div class="form-group">

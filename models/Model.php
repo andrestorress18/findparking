@@ -1,6 +1,5 @@
 <?php
-abstract class Model
-{
+abstract class Model{
     private static $db_host = 'localhost';
     private static $db_user = 'root';
     private static $db_pass = '';
@@ -10,12 +9,13 @@ abstract class Model
     protected $query;
     protected $rows = array();
 
-    abstract protected function set();
-    abstract protected function get();
+    //Metodos abstractos protegidos para CRUD para las clases que hereden
+    abstract protected function ins();
+    abstract protected function upd();
+    abstract protected function sel();
     abstract protected function del();
 
-    private function db_open()
-    {
+    private function db_open(){
         $this->conn = new mysqli(
             self::$db_host,
             self::$db_user,
@@ -24,13 +24,11 @@ abstract class Model
         );
         $this->conn->set_charset(self::$db_charset);
     }
-    private function db_close()
-    {
+    private function db_close(){
         $this->conn->close();
 
     }
-    protected function set_query()
-    {
+    protected function set_query(){
         $this->db_open();
         $this->conn->query($this->query);
         if ($this->conn->errno <> 0) {
@@ -41,8 +39,7 @@ abstract class Model
         $this->db_close();
         return $id;
     }
-    protected function get_query()
-    {
+    protected function get_query(){
         $this->db_open();
         $result = $this->conn->query($this->query) or die($this->conn->error);
         $num_rows = $result->num_rows;

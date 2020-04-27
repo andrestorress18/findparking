@@ -5,20 +5,17 @@ class UsuarioController {
 	public function __construct() {
 		$this->model = new UsuarioModel();
 	}
-	public function set($usuario_data = array()) {
-		return $this->model->set($usuario_data);
+	public function ins($usuario_data = array()) {
+		return $this->model->ins($usuario_data);
 	}
-	public function add($usuario_data = array()) {
-		return $this->model->add($usuario_data);
+	public function upd($usuario_data = array()) {
+		return $this->model->upd($usuario_data);
 	}
 	public function set_pass($pass_data = array()) {
 		return $this->model->set_pass($pass_data);
 	}
-	public function get($user = '') {
-		return $this->model->get($user);
-	}
-	public function get_enti($enti = '') {
-		return $this->model->get_enti($enti);
+	public function sel($user = '') {
+		return $this->model->sel($user);
 	}
 	public function del($user = '') {
 		return $this->model->del($user);

@@ -1,4 +1,10 @@
-<?php
+<?php 
+	$result_controller = new ParqueaderoController();
+  $result = $result_controller->sel(); 
+  $num_result = empty($result) ? 0 : count($result); 
+  $usuario_controller = new UsuarioController();
+  $usuario = $usuario_controller->sel(); 
+  $num_usuario = empty($usuario) ? 0 : count($usuario); 
 if ($_SESSION['Sesion'] == true) {
 	$controller  = new ViewController();
 	$controller->load_view_user('resultados');
@@ -27,7 +33,7 @@ if ($_SESSION['Sesion'] == true) {
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-	<script src="./public/js/softbill.js"></script>
+	<script src="./public/js/findparking.js"></script>
 	<link href="./public/css/datatables.min.css" rel="stylesheet">
 	<script type="text/javascript" src="./public/js/datatables.min.js"></script>
 </head>
@@ -69,36 +75,46 @@ if ($_SESSION['Sesion'] == true) {
 				</style>
 		    	<div id="map"></div>
 		    	<script>
-					// Initialize and add the map
-					function initMap() {
-					  // The location of Uluru
-					  var center = {lat: 4.343832, lng: -74.362373};
+				    // Initialize and add the map
+				    function initMap() {
+				      // The location of Uluru
+				      var center = {lat: 4.347035, lng: -74.362679};
 
-					  var lugares =[
-					  	{lat: 4.343832, lng: -74.362373},
-					    {lat: 4.347035, lng: -74.362679}, 
-					    {lat: 4.345929, lng: -74.357715},
-					    {lat: 4.342733, lng: -74.359978},
-					    {lat: 4.347828, lng: -74.359346},
-					    {lat: 4.339668, lng: -74.362548}
-					  ];
-					  // The map, centered at Uluru
-					  var map = new google.maps.Map(
-					    document.getElementById('map'), {
-					      zoom: 15, 
-					      center: center
-					    }
-					  );
-					  for (i = 0 ; i< lugares.length; i++) {
+				      var lugares =[
+				      <?php 
+				      $template_map = "";
+				      for ($m = 0; $m < $num_result; $m++) {
+				        $template_map .= "{lat: ".$result[$m]['parq_lat'].", lng: ".$result[$m]['parq_log']."},";  
+				      }
+				      $template_map = substr($template_map, 0, -1);
+				      echo $template_map;
+				       ?>
+				        
+				      ];
+				      // The map, centered at Uluru
+				      var map = new google.maps.Map(
+				        document.getElementById('map'), {
+				          zoom: 15, 
+				          center: center
+				        }
+				      );
+				      for (i = 0 ; i< lugares.length; i++) {
 
-					    var marker = new google.maps.Marker(
-					      {position: lugares[i], 
-					        map: map}
-					    );
-
-					  }
-				  	}
-		    	</script>
+				        var marker = new google.maps.Marker(
+				          {position: lugares[i], 
+				            map: map}
+				        );
+				        marker.setIcon('./public/img/system/parking-ico-map.png');
+				        var temInfo = {
+				          content: '<div style="height: 150px;width:300px;">Información de prueba</div>'
+				        }
+				        var infoMarker = new google.maps.InfoWindow(temInfo);
+				        google.maps.event.addListener(marker,'click',function(){
+				          infoMarker.open(map,marker);
+				        })
+				      }
+				    }
+				  </script>
 		    	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUn955lxF_sZt7ecu6WPg5ArJO8GwmrQs&callback=initMap" async defer></script>
 			</div>
 		</div>

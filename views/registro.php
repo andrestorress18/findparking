@@ -3,7 +3,7 @@ print('<title>Registro | Find Parking</title>');
  ?>
  <?php
 $puc_controller = new RegistroController();
-$puc = $puc_controller->get(); 
+$puc = $puc_controller->sel(); 
 $num_puc = empty($puc) ? 0 : count($puc); 
 ?>
 <div class="container-cab">
@@ -30,12 +30,14 @@ $num_puc = empty($puc) ? 0 : count($puc);
 	    $modal->ventana_modal("del",$datos, "", "Eliminar registro", "form-regist-del");
 	}
 	$result_controller = new RegistroController();
-	$result = $result_controller->get(); 
+	$result = $result_controller->sel(); 
 	$num_result = empty($result) ? 0 : count($result); 
-
-	$datos = 1;
+	if ($num_result!=0) {
+		$datos = array_keys($result[0]);
+	}
+	
 	$modal = new FunctionModel();
-	$modal->ventana_modal("fact", $datos, "", "Generar factura", "form-facturar");
+	$modal->ventana_modal("comp", $datos, "", "Generar comprobante", "form-facturar");
 	 ?>
 	<div class="container-tabla">
 		<table id="tbl_cuentas" class="table table-striped">
@@ -43,10 +45,10 @@ $num_puc = empty($puc) ? 0 : count($puc);
 				<tr>
 					<th scope="col">#</th>
 					<th scope="col">Conductor</th>
-					<th scope="col">Placa:</th>
-					<th scope="col">Fecha</th>
-					<th scope="col">Hora</th>
-					<th scope="col">Estado</th>
+					<th scope="col">Placa</th>
+					<th scope="col">Ingreso</th>
+					<th scope="col">Salida</th>
+					<th scope="col">Valor</th>
 					<th scope="col">Opciones</th>
 			    </tr>
 			</thead>
@@ -54,15 +56,15 @@ $num_puc = empty($puc) ? 0 : count($puc);
 				<?php 
 				for ($m = 0; $m < $num_result; $m++) {?>
 			    <tr>
-			      <th scope="row"><?php echo $result[$m]['cuen_id']; ?></th>
-						<td><?php echo $result[$m]['cuen_des']; ?></td>
-						<td><?php echo $result[$m]['cuen_valo']; ?></td>
-						<td><?php echo $result[$m]['usua_nom']; ?></td>
-						<td><?php echo $result[$m]['cuen_fec']; ?></td>
-						<td><?php echo $result[$m]['esta_nom']; ?></td>
+			      <th scope="row"><?php echo $result[$m]['comp_cod']; ?></th>
+						<td><?php echo $result[$m]['vehi_con']; ?></td>
+						<td><?php echo $result[$m]['vehi_pla']; ?></td>
+						<td><?php echo $result[$m]['comp_fin'].' '.$result[$m]['comp_hin']; ?></td>
+						<td><?php echo $result[$m]['comp_fsa'].' '.$result[$m]['comp_hsa']; ?></td>
+						<td><?php echo $result[$m]['comp_val']; ?></td>
 			      		<td>
 			      	    <?php if ($_SESSION['usua_rol'] == "Super administrador" OR $_SESSION['usua_rol'] == "Administrador") {
-			      		echo '<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#Modal-fact" data-fact_id="' . $result[$m]['cuen_id'] . '" data-name="' . $result[$m]['cuen_des'] . '" data-cuen_des="' . $result[$m]['cuen_des'] . '" data-fact_pla="'.$result[$m]['cuen_valo'].'" ><i class="fa fa-dollar-sign"></i>Facturar</button>';	
+			      		echo '<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#Modal-comp" data-comp_cod="' . $result[$m]['comp_cod'] . '" data-name="' . $result[$m]['comp_cod'] . '"  data-comp_fin="' . $result[$m]['comp_fin'] . '" data-comp_hin="' . $result[$m]['comp_hin'] . '" data-vehi_con="' . $result[$m]['vehi_con'] . '" data-vehi_pla="' . $result[$m]['vehi_pla'] . '" data-comp_cod="' . $result[$m]['comp_cod'] . '" data-comp_val="'.$result[$m]['comp_val'].'" ><i class="fa fa-dollar-sign"></i> Comprobante</button>';	
 			      	 	}?>	
 				      	<?php if ($_SESSION['usua_rol'] == "Operario") {?>
 					      	<button type="button" class="btn btn-info"><i class="fa fa-edit"></i></button>

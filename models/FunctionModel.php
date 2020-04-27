@@ -37,8 +37,8 @@ class FunctionModel {
                       for ($i=0; $i < $num_tit; $i++) {
                         echo "var ".$data[$i]." = button.data('".$data[$i]."')
                             modal.find('.modal-body input#".$id."_".$data[$i]."').val(".$data[$i].")\n";
-                        if(strpos($data[$i], "_esta_fk") || strpos($data[$i], "_banc_fk") || strpos($data[$i], "_tipo_fk") || strpos($data[$i], "_espe_fk")){
-                            echo "document.getElementById('".$id."_".$data[$i]."').options.item(".$data[$i].").selected = 'selected';\n";
+                        if(strpos($data[$i], "_esta_fk") || strpos($data[$i], "_banc_fk") || strpos($data[$i], "_rol") || strpos($data[$i], "_est")){
+                            echo "document.getElementById('".$id."_".$data[$i]."').options.namedItem(".$data[$i].").selected = 'selected';\n";
                         }else if(strpos($data[$i], "_des") || strpos($data[$i], "_con")){
                             echo "document.getElementById('".$id."_".$data[$i]."').value = ".$data[$i].";\n";
                         }else{

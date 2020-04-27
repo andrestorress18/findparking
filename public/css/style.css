@@ -1734,6 +1734,33 @@ footer {
   .esc-item .esc-text {
     padding: 15px;
     text-align: center; }
+    .esc-item .esc-text h1 {
+      font-size: 3.5em; }
+
+.widget {
+  margin: 1em; }
+
+.widget p {
+  display: inline-block;
+  line-height: 1em; }
+
+.widget .fecha {
+  text-align: center;
+  font-size: 1.2em;
+  width: 100%; }
+
+.widget .reloj {
+  width: 100%;
+  line-height: 1em;
+  text-align: center;
+  font-size: 4.5em; }
+
+.widget .reloj .caja-segundos {
+  display: inline-block; }
+
+.widget .reloj .segundos, .widget .reloj .ampm {
+  font-size: 1.5rem;
+  display: block; }
 
 .map-sec {
   background-color: #fff;
