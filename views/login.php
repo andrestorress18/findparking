@@ -48,7 +48,7 @@ if ($_SESSION['Sesion'] == true) {
 						  	<center>
 						  		<div class="login-img">
 						  			<img class="img-1" src="./public/img/system/find parking-h.png" width="100" alt="">
-						  			<img class="img-2" src="./public/img/system/find parking-h.png" width="100" alt="">
+						  			<img class="img-2" src="./public/img/system/find parking-w.png" width="100" alt="">
 						  		</div><br>
 						        <input type="email" class="form-control" name="email" id="inputEmail3" placeholder="Correo"><br>
 						        <input type="password" class="form-control" name="pass" id="inputPassword3" placeholder="Contraseña"><br>

@@ -39,8 +39,10 @@ class UsuarioModel extends Model{
     }
     
     public function validate_user($email, $pass) {
-        $this->query = "SELECT * FROM tbl_usuario
-            WHERE  usua_pas = MD5('$pass') AND usua_ema = '$email'";
+        $this->query = "SELECT * FROM tbl_usuario AS U
+LEFT JOIN tbl_gestor AS G ON U.usua_cod = G.gest_usua_fk
+LEFT JOIN tbl_parqueadero AS P ON P.parq_id = G.gest_parq_fk
+            WHERE  U.usua_pas = MD5('$pass') AND U.usua_ema = '$email'";
         $this->get_query();
         $data = array();
         foreach ($this->rows as $key => $value) {

@@ -43,6 +43,7 @@ CREATE TABLE tbl_cupo(
   cupo_ref varchar(15) NOT NULL -- Referencia del cupo
 );
 CREATE TABLE tbl_cupo_parqueadero(
+  cupa_cod int(10) AUTO_INCREMENT PRIMARY KEY, -- Codigo del parqueadero y cupo
   cupa_est int(5) NOT NULL, -- Estado del cupo
   cupa_cub boolean NOT NULL, -- Cupo cubierto
   cupa_dim varchar(10) NOT NULL, -- Dimesiones del cupo
@@ -62,15 +63,15 @@ CREATE TABLE tbl_vehiculo(
 );
 
 CREATE TABLE tbl_comprobante(
-  comp_cod int(6) UNSIGNED ZEROFILL AUTO_INCREMENT PRIMARY KEY, -- Identificador del sistema para el cuenta
-  comp_fin date NOT NULL, -- Numero de Identificación Tributario del cuenta
-  comp_hin time NOT NULL, -- Hora de ingreso
-  comp_fsa date NOT NULL,
-  comp_hsa time NOT NULL,
-  comp_val varchar(10) NOT NULL,
+  comp_cod int(6) UNSIGNED ZEROFILL AUTO_INCREMENT PRIMARY KEY, -- Identificador del sistema para el comprobante
+  comp_fin date NOT NULL, -- Fecha de ingreso del vehiculo
+  comp_hin time NOT NULL, -- Hora de ingreso del vehiculo
+  comp_fsa date,  -- Fecha de salida del vehiculo
+  comp_hsa time, -- Hora de salida del vehiculo
+  comp_val varchar(10), -- Valor total a pagar
   comp_cupo_fk int(10) NOT NULL, -- Llave foranea del cupo en uso
   comp_vehi_fk int(5) NOT NULL, -- Llave foranea del vehiculo que usa el cupo
-  FOREIGN KEY (comp_cupo_fk) REFERENCES tbl_cupo(cupo_cod) 
+  FOREIGN KEY (comp_cupo_fk) REFERENCES tbl_cupo_parqueadero(cupa_cod) 
     ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (comp_vehi_fk) REFERENCES tbl_vehiculo(vehi_cod) 
     ON DELETE NO ACTION ON UPDATE NO ACTION

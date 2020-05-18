@@ -37,7 +37,7 @@
 					<div class="input-group-prepend">
 						<div class="input-group-text">Celular</div>
 					</div>
-					<input type="text" disabled class="form-control" value="<?php echo $_SESSION['usua_tel'] ?>">
+					<input type="text" disabled class="form-control" value="<?php echo $_SESSION['usua_cel'] ?>">
 		        </div>
 			</div>
 		    <div class="col-sm-6 my-1">

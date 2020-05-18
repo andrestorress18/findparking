@@ -1,3 +1,4 @@
+<title>Error 404 | Find Parking</title>
 <div class="e404 container-flex cont-just-cen cont-ialg-cent" >
 	<div class="container-e404">
 		<img src="./public/img/system/findparking-error-404.png" alt="Recurso no encontrado">

@@ -1,4 +1,4 @@
-$color-uno: #ED3237 //rgb(255,102,0)
+$color-uno: #E03438 //#ED3237
 $color-dos: #fff
 $color-tre: #000
 
@@ -27,7 +27,7 @@ $horizontal: 400px
 	background-color: rgba(211, 211, 211, 0.3)
 
 //IMPORTACION DE FUENTE DE TEXTO
-@import url('https://fonts.googleapis.com/css?family=Montserrat')
+@import url('https://fonts.googleapis.com/css2?family=Montserrat')
 //ADICIONES A BOOTSTRAP #1E3D53
 .paginate_button,.paginate_button:hover,.paginate_button:active
 	background-color: transparent !important
@@ -57,10 +57,10 @@ $horizontal: 400px
 	padding: 7px 15px
 	&:hover
 		opacity: .8
-//	overflow-x: auto
+//overflow-x: auto
 .img-size-uno
-	width: 60px
-	height: 60px
+	width: 45px
+	height: 45px
 .img-size-dos
 	width: 100px
 	height: 100px
@@ -142,7 +142,10 @@ button
 			margin-left: -5px !important
 	i
 		margin: 0px !important
-
+.img-emp
+	width: 80px
+.info-emp
+	width: calc(100% - 90px)
 .img-user
 	width: 190px
 	@media (max-width: 991px)
@@ -156,7 +159,7 @@ button
 body
 	margin: 0
 	padding: 0
-	font-family: 'Montserrat', sans-seri
+	//font-family: 'Montserrat', sans-seri
 .contenedor
 	display: flex
 	width: 100vw
@@ -404,7 +407,6 @@ body
 				width: 100%
 				height: 16px 
 				display: block
-				overflow: hidden
 				font-size: 14px 
 				font-weight: 500
 
@@ -712,7 +714,7 @@ body
 .factura-firma
 	width: 250px
 	border-bottom: 1px solid $color-uno
-.e404
+.e404,.e401
 	height: 100vh
 .container-form
 	border-radius: 10px 
@@ -833,7 +835,7 @@ body
 //TABLAS
 .container-tabla
 	overflow: hidden !important
-	overflow-x: auto
+	overflow-x: auto !important
 .factura-tabla
 	width: 80%
 	margin: auto
@@ -1542,7 +1544,6 @@ footer
 				color: $color-dos
 		@media (max-width: $tablet)
 			width: 48%
-		@media (max-width: $tablet)
 			margin: 3px 0px
 		.cara-item-ico
 			width: 100%
@@ -1554,6 +1555,7 @@ footer
 			text-align: center
 .esc-secc
 	display: flex
+	flex-wrap: wrap
 	justify-content: space-between
 .esc-item
 	width: 32%
@@ -1562,17 +1564,24 @@ footer
 	background-color: #fff
 	box-shadow: 0px 0px 3px rgba(0,0,0,.3)
 	overflow: hidden
+	@media (max-width: $tablet)
+		width: 100%
+		margin: 5px 0px
 	.esc-tit
-		background-color: rgba($color-uno,.8)
+		background-color: $color-uno
 		color: #fff
-		padding: 15px
+		padding: 8px 15px
 		font-size: 18px
 		display: flex
 		justify-content: space-between
 		i
 			font-size: 30px
 	.esc-text
-		padding: 15px
+		padding: 7px 15px
+		display: flex
+		flex-wrap: wrap
+		align-items: middle
+		justify-content: center
 		text-align: center
 		h1
 			font-size: 3.5em
@@ -1596,6 +1605,68 @@ footer
 .widget .reloj .segundos, .widget .reloj .ampm
 	font-size: 1.5rem
 	display: block
+.cupos-sec
+	width: 100%
+	display: flex
+	justify-content: space-between
+	flex-wrap: wrap
+	.cupo
+		width: 15%
+		margin: 5px
+		color: #000
+		height: 200px
+		text-align: center
+		padding: 10px
+		border-radius: 10px
+		box-shadow: 0px 0px 5px rgba($color-tre,.5)
+		@media (max-width: $tablet)
+			width: 22%
+			h3
+				font-size: 20px
+		@media (max-width: $mobil)
+			height: 150px
+	.cupo_dis
+		background: #62E164
+	.cupo_ocu
+		background: $color-uno
+.form-busqueda
+	position: fixed
+	padding: 20px 10px
+	top: 35px
+	left: 10px
+	height: 90vh
+	width: 300px
+	border-radius: 10px
+	background-color: rgba($color-tre,.8)
+	.busq-logo
+		width: 100%
+		text-align: center
+		img
+			width: 80%
+	.busq-menu
+		width: 100%
+		ul
+			padding: 0px
+			width: 100%
+			display: flex
+			justify-content: center
+			list-style: none
+			li a
+				display: flex
+				text-decoration: none
+				justify-content: center
+				align-items: center
+				background: $color-uno
+				color: $color-dos
+				font-size: 20px
+				height: 40px
+				margin: 10px
+				width: 40px
+				border-radius: 50%
+	.busq-info
+		color: $color-dos
+		text-align: center
+
 
 //________________________Find parking__________________________//
 .map-sec
@@ -1603,7 +1674,13 @@ footer
 	border-radius: 10px
 	box-shadow: 0px 0px 3px rgba(0,0,0,.5)
 	overflow: hidden
-
+#map
+	height: 400px
+	@media (max-width: $tablet)
+		width: 100vh
 .row
 	margin-right: 0px !important
 	margin-left: 0px !important
+.visor-pdf
+	width: 100%
+	height: calc(100vh - 78px)

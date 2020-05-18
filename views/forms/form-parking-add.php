@@ -73,7 +73,8 @@
         </div>
     </div>
     <div class="form-row align-items-center">
-    	<div class="col-sm-11 my-1"><label for="parq_cap">Agregar cupos al parqueadero:</label></div><div class="col-sm-1 my-1">
+    	<div class="col-sm-11 my-1"><label for="parq_cap">Agregar cupos al parqueadero:</label></div>
+    	<div class="col-sm-1 my-1">
 			<button id="adicionar" type="button" class="form-control btn-primary"><i class="fas fa-plus"></i></button>  
 		</div> 
     	<div class="col-sm-12 my-1">
@@ -81,16 +82,16 @@
 		        <tr class="fila-fija">
 		            <td>
 		                <select class="form-control" required name="cupa_cupo_fk[]" >
-                <option value="">Seleccione el cupo</option>
-                <?php
-                    $cupos      = new parqueaderoController();
-                    $cupos_data = $cupos->sel_cupo();
-                    $num_cupos    = count($cupos_data);
-                    for ($regist = 0; $regist < $num_cupos; $regist++) {
-                        echo '<option value="' . $cupos_data[$regist]['cupo_cod'] . '" >' . $cupos_data[$regist]['cupo_ref']."</option>";
-                    }
-                ?>
-            </select>
+			                <option value="">Seleccione el cupo</option>
+			                <?php
+			                    $cupos      = new parqueaderoController();
+			                    $cupos_data = $cupos->sel_cupo();
+			                    $num_cupos    = count($cupos_data);
+			                    for ($regist = 0; $regist < $num_cupos; $regist++) {
+			                        echo '<option value="' . $cupos_data[$regist]['cupo_cod'] . '" >' . $cupos_data[$regist]['cupo_ref']."</option>";
+			                    }
+			                ?>
+			            </select>
 		            </td>
 		            <td>
 		            	<select class="form-control" id="add_cupa_cub" onchange="seleccion(this)" required name="cupa_cub[]" >
@@ -115,7 +116,7 @@
 		                <select class="form-control" id="add_usua_fk" onchange="seleccion(this)" required name="gest_usua_fk[]" >
 		                    <option value="">Seleccione el usuario</option>
 		                    <?php
-		                        $usuario      = new usuarioController();
+		                        $usuario      = new UsuarioController();
 		                        $usuario_data = $usuario->sel();
 		                        $num_usuario   = count($usuario_data);
 		                        for ($regist = 0; $regist < $num_usuario; $regist++) {
@@ -132,7 +133,6 @@
 			<button id="adicionarUsu" type="button" class="form-control btn-primary"><i class="fas fa-plus"></i>  Adicionar</button>  
 		</div>  	
     </div>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">X</button>
     <button type="submit" class="btn btn-success">Registrar</button>
     <input type="hidden" name="crud" value="add">
 </form>

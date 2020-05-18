@@ -11,8 +11,8 @@ class RegistroController {
 	public function upd($regi_cod = '') {
 		return $this->model->upd($regi_cod);
 	}
-	public function sel($regi_cod = '') {
-		return $this->model->sel($regi_cod);
+	public function sel($regi_cod = '',$parq_id = '') {
+		return $this->model->sel($regi_cod,$parq_id);
 	}
 	public function del($regi_cod = '') {
 		return $this->model->del($regi_cod);

@@ -1,7 +1,7 @@
 <?php
 if ($_SESSION['usua_rol']<>"Administrador") {
 	$controller  = new ViewController();
-	$controller->load_view('error403');
+	$controller->load_view('error401');
 }else{
 print('<title>Usuarios | Find Parking</title>');
 /***********INICIO CUERPO***********/

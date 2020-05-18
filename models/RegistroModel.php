@@ -1,25 +1,40 @@
 <?php
 class RegistroModel extends Model{
 
-    public function ins($cpuc_data = array()){
-        foreach ($cpuc_data as $key => $value) {
+    public function ins($comp_data = array()){
+        foreach ($comp_data as $key => $value) {
             $$key = $value;
         }
-        $this->query = "REPLACE INTO tbl_comprobante (comp_cod,plan_nom,plan_img,plan_nci,plan_des,plan_espe_fk) VALUES ($comp_cod,'$plan_nom','$plan_img','$plan_nci','$plan_des',$plan_espe_fk)";
+        $this->query = "INSERT INTO tbl_comprobante (comp_fin, comp_hin, comp_cupo_fk, comp_vehi_fk) VALUES ('$comp_fin', '$comp_hin', $comp_cupo_fk, $comp_vehi_fk)";
         $this->set_query();
     }
-    public function upd($cpuc_data = array()){
-        foreach ($cpuc_data as $key => $value) {
+    public function upd($comp_data = array()){
+        foreach ($comp_data as $key => $value) {
             $$key = $value;
         }
-        $this->query = "REPLACE INTO tbl_comprobante (comp_cod,plan_nom,plan_img,plan_nci,plan_des,plan_espe_fk) VALUES ($comp_cod,'$plan_nom','$plan_img','$plan_nci','$plan_des',$plan_espe_fk)";
+        $this->query = "UPDATE tbl_comprobante SET comp_fsa = '$comp_fsa', comp_hsa = '$comp_hsa', comp_val = '$comp_val' WHERE comp_cod = $comp_cod";
         $this->set_query();
     }
 
-    public function sel($comp_cod = ''){
-        $this->query = ($comp_cod != '')
-        ? "SELECT * FROM tbl_comprobante AS C INNER JOIN tbl_vehiculo AS V ON C.comp_vehi_fk = V.vehi_cod WHERE comp_cod = $comp_cod"
-        : 'SELECT * FROM tbl_comprobante AS C INNER JOIN tbl_vehiculo AS V ON C.comp_vehi_fk = V.vehi_cod';
+    public function sel($comp_cod = '',$parq_id = ''){
+        $this->query = ($comp_cod != '')? "SELECT * FROM tbl_vehiculo AS V
+                INNER JOIN tbl_comprobante AS C ON V.vehi_cod = C.comp_vehi_fk
+                INNER JOIN tbl_cupo_parqueadero AS CP ON C.comp_cupo_fk = CP.cupa_cod
+                INNER JOIN tbl_cupo AS CU ON CP.cupa_cupo_fk = CU.cupo_cod
+                INNER JOIN tbl_parqueadero AS P ON CP.cupa_parq_fk = P.parq_id
+                WHERE C.comp_cod = $comp_cod"
+            :($parq_id != '')? "SELECT * FROM tbl_vehiculo AS V
+                INNER JOIN tbl_comprobante AS C ON V.vehi_cod = C.comp_vehi_fk
+                INNER JOIN tbl_cupo_parqueadero AS CP ON C.comp_cupo_fk = CP.cupa_cod
+                INNER JOIN tbl_cupo AS CU ON CP.cupa_cupo_fk = CU.cupo_cod
+                INNER JOIN tbl_parqueadero AS P ON CP.cupa_parq_fk = P.parq_id
+                WHERE P.parq_id = $parq_id"
+                :
+                "SELECT * FROM tbl_vehiculo AS V
+                INNER JOIN tbl_comprobante AS C ON V.vehi_cod = C.comp_vehi_fk
+                INNER JOIN tbl_cupo_parqueadero AS CP ON C.comp_cupo_fk = CP.cupa_cod
+                INNER JOIN tbl_cupo AS CU ON CP.cupa_cupo_fk = CU.cupo_cod
+                INNER JOIN tbl_parqueadero AS P ON CP.cupa_parq_fk = P.parq_id";
         $this->get_query();
         $num_rows = count($this->rows);
         $data     = array();

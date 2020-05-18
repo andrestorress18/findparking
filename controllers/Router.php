@@ -46,6 +46,10 @@ class Router{
                     break;
                  case 'registro':
                     if (!isset($_POST['crud'])) $controller->load_view_user('registro');
+                    else if ($_POST['crud'] == 'add') $controller->load_page('actions-registro');
+                    else if ($_POST['crud'] == 'del') $controller->load_page('actions-registro');
+                    else if ($_POST['crud'] == 'edi') $controller->load_page('actions-registro');
+                    else if ($_POST['crud'] == 'fac') $controller->load_page('actions-registro');
                     break;    
                 case 'cerrar':
                     $user_session = new SessionController();
@@ -74,13 +78,21 @@ class Router{
                                 $_SESSION['Sesion']   = true;
                                 $_SESSION['usua_id'] = $session[0]['usua_cod'];
                                 $_SESSION['usua_ced'] = $session[0]['usua_ced'];
-                                $_SESSION['usua_ema'] = $session[0]['usua_cor'];
-                                $_SESSION['usua_tel'] = $session[0]['usua_tel'];
+                                $_SESSION['usua_ema'] = $session[0]['usua_ema'];
+                                $_SESSION['usua_cel'] = $session[0]['usua_cel'];
                                 $_SESSION['usua_pas'] = $session[0]['usua_con'];
                                 $_SESSION['usua_img'] = $session[0]['usua_img'];
                                 $_SESSION['usua_nom'] = $session[0]['usua_nom'];
                                 $_SESSION['usua_dir'] = $session[0]['usua_dir'];
                                 $_SESSION['usua_rol'] = $session[0]['usua_rol'];
+                                $_SESSION['parq_id'] = '';
+                                if (!empty($session[0]['parq_id'])) {
+                                   $_SESSION['parq_id'] = $session[0]['parq_id'];
+                                   $_SESSION['parq_nom'] = $session[0]['parq_nom'];
+                                   $_SESSION['parq_des'] = $session[0]['parq_des'];
+                                   $_SESSION['parq_fot'] = $session[0]['parq_fot'];
+                                   $_SESSION['parq_tar'] = $session[0]['parq_tar'];
+                                }
                                 header('Location: ./escritorio');
                             }
                         }

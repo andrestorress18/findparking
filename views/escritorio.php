@@ -6,33 +6,11 @@
   $usuario = $usuario_controller->sel(); 
   $num_usuario = empty($usuario) ? 0 : count($usuario); 
 ?>
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <title>Escritorio | Find Parking</title>
 <div class="cont-pad-tre">
-	<style type="text/css" media="screen">
-  #map {
-        height: 400px;
-      }  
-  </style>
   <div class="esc-secc">
-    <div class="esc-item">
-      <div class="esc-tit">
-        Parqueaderos registrados
-        <i class="fa fa-parking"></i>
-      </div>
-      <div class="esc-text">
-        <h1><?php echo $num_result ?></h1>
-      </div>
-    </div>
-    <div class="esc-item">
-      <div class="esc-tit">
-        Usuarios registrados
-        <i class="fa fa-users"></i>
-      </div>
-      <div class="esc-text">
-        <h1><?php echo $num_usuario ?></h1>
-      </div>
-    </div>
     <div class="esc-item">
       <div class="widget">
         <div class="fecha">
@@ -56,7 +34,70 @@
         </div>
       </div>
     </div>
+    <?php if (!empty($_SESSION['parq_id'])) {?>
+      <div class="esc-item">
+        <div class="esc-tit">
+          Parqueadero
+          <i class="fa fa-parking"></i>
+        </div>
+        <div class="esc-text">
+          <h4><?php echo $_SESSION['parq_nom']; ?></h4>
+          <p><?php echo $_SESSION['parq_des']; ?></p>
+        </div>
+      </div>
+      <div class="esc-item">
+        <div class="esc-tit">
+          Tarifa x Hora
+          <i class="fa fa-dollar-sign"></i>
+        </div>
+        <div class="esc-text">
+          <h1>$ <?php echo number_format($_SESSION['parq_tar']); ?></h1>
+        </div>
+      </div>
+  <?php }else{ ?>
+    <div class="esc-item">
+      <div class="esc-tit">
+        Parqueaderos registrados
+        <i class="fa fa-parking"></i>
+      </div>
+      <div class="esc-text">
+        <h1><?php echo $num_result ?></h1>
+      </div>
+    </div>
+    <div class="esc-item">
+      <div class="esc-tit">
+        Usuarios registrados
+        <i class="fa fa-users"></i>
+      </div>
+      <div class="esc-text">
+        <h1><?php echo $num_usuario ?></h1>
+      </div>
+    </div>
+  <?php } ?>
   </div>
+  <?php 
+    if (!empty($_SESSION['parq_id'])) {
+      echo "<div class='cupos-sec'>";
+      $cupos_controller = new ParqueaderoController();
+      $cupos = $cupos_controller->sel_cupo($_SESSION['parq_id'],'');
+      $num_cupos = empty($cupos) ? 0 : count($cupos); 
+      for ($m = 0; $m < $num_cupos; $m++) {
+        echo($cupos[$m]['cupa_est']==0)?
+        "<div class='cupo cupo_dis'>
+          <h3>".$cupos[$m]['cupo_ref']."</h3>
+          <p>".$cupos[$m]['cupa_dim']."
+          </p>
+        </div>"
+        :"<div class='cupo cupo_ocu'>
+          <h3>".$cupos[$m]['cupo_ref']."</h3>
+          <p>".$cupos[$m]['cupa_dim']."
+          </p>
+          <img src='./public/img/system/ubicacion.png' width='60%' alt=''>
+        </div>";
+      }
+      echo "</div>";
+    }else{
+   ?>
   <div class="map-sec">
   	<div id="map"></div>
   </div>
@@ -104,6 +145,7 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUn955lxF_sZt7ecu6WPg5ArJO8GwmrQs&callback=initMap"
     async defer></script>
+  <?php } ?>
 </div>
 
 <script>
@@ -111,6 +153,60 @@
 	  $('#tbl_resultados').DataTable();
 	  $('.dataTables_length').addClass('bs-select');
 	});
+  (function(){
+    var actualizarHora = function(){
+
+        var fecha   = new Date(),
+            hora    = fecha.getHours(),
+            ampm,
+            minutos = fecha.getMinutes(),
+            segundos = fecha.getSeconds(),
+            diaSemana = 0+fecha.getDay(),
+            dia     = fecha.getDate(),
+            mes     = fecha.getMonth(),
+            year    = fecha.getFullYear();
+
+        var pHoras = document.querySelector('#horas'), 
+            pAMPM = document.querySelector('#ampm'), 
+            pMinutos = document.querySelector('#minutos'), 
+            pSegundos = document.querySelector('#segundos'), 
+            pDiaSemana = document.querySelector('#diaSemana'), 
+            pDia = document.querySelector('#dia'), 
+            pMes = document.querySelector('#mes'), 
+            pYear = document.querySelector('#year');
+
+        var semana = ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];
+        if (pDiaSemana) {
+            pDiaSemana.textContent = semana[diaSemana];
+        }
+        pDia.textContent = dia;
+
+        var meses = ['Enero', 'Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+        
+        pMes.textContent = meses[mes];
+
+        pYear.textContent = year;
+        if(hora >= 12){
+            hora = hora - 12;
+            ampm = 'PM';
+        }else{
+            ampm = 'AM';
+        }
+        if(hora == 0){
+            hora = 12;
+        }
+        pHoras.textContent = hora;
+        pAMPM.textContent = ampm;
+
+        if (minutos<10) {minutos="0"+minutos};
+        if (segundos<10) {segundos="0"+segundos};
+        pMinutos.textContent = minutos;
+        pSegundos.textContent = segundos;
+    };  
+
+    actualizarHora();
+    var intervalo = setInterval(actualizarHora,1000);
+}())
 </script>
 	
 

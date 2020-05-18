@@ -24,6 +24,12 @@ class ParqueaderoModel extends Model {
         return $id_reg;
     }
 
+    public function upd_cupo($cupo_est,$cupa_cod) {
+        $this->query = "UPDATE tbl_cupo_parqueadero SET cupa_est = $cupo_est WHERE cupa_cod = $cupa_cod";
+        $this->set_query();
+    }
+     
+
     public function sel($parq_id = '') {
         $this->query = ($parq_id != '')
         ? "SELECT * FROM tbl_parqueadero WHERE parq_id = $parq_id"
@@ -35,10 +41,15 @@ class ParqueaderoModel extends Model {
         }
         return $data;
     }
-    public function sel_cupo($cupo_id = '') {
-        $this->query = ($parq_id != '')
-        ? "SELECT * FROM tbl_cupo WHERE cupo_cod = $cupo_cod"
-        : 'SELECT * FROM tbl_cupo';
+    public function sel_cupo($parq_id = '',$cupa_est = '') {
+        $this->query = ($parq_id != '' AND $cupa_est != '')
+        ? "SELECT * FROM tbl_cupo_parqueadero AS CP
+            INNER JOIN tbl_cupo AS C ON CP.cupa_cupo_fk = C.cupo_cod
+            WHERE CP.cupa_parq_fk = $parq_id AND CP.cupa_est =  $cupa_est"
+        :$dos = ($parq_id != '')?"SELECT * FROM tbl_cupo_parqueadero AS CP
+            INNER JOIN tbl_cupo AS C ON CP.cupa_cupo_fk = C.cupo_cod
+            WHERE CP.cupa_parq_fk = $parq_id"
+        :"SELECT * FROM tbl_cupo";
         $this->get_query();
         $data = array();
         foreach ($this->rows as $key => $value) {

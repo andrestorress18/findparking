@@ -1,6 +1,6 @@
 <div class="menu-top">
 	<div class="bar-top-logo">
-		<img src="public/img/system/find parking-w.png" alt="">
+		<img src="public/img/system/find parking-y.png" alt="">
 	</div>
 	<div class="menu-option">		
 		<div class="usu-option">
@@ -27,7 +27,7 @@
 								<i class="fas fa-building"></i>Datos de empresa
 							</button>
 						</li>
-						<li><a href="#" ><i class="fa fa-question-circle"></i><div class="btn-bars-resp">Manual de usuario</div></a>
+						<li><a href="ayuda" ><i class="fa fa-question-circle"></i><div class="btn-bars-resp">Manual de usuario</div></a>
 						</li>
 						<li><a href="cerrar" ><i class="fas fa-power-off"></i>Cerrar sesión</a></li>
 					</ul>
